@@ -8,9 +8,7 @@ BasicUpstart2(start)
 
 * = $0810 "Program Start"
 
-#import "constants.asm"
-#import "macros.asm"
-#import "sprite.asm"
+#import "lib/gamelib.asm"
 
 start:
 
