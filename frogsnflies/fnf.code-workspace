@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "fnf"
+		}
+	],
+	"settings": {
+		"kickassembler.startup": "game.asm"
+	}
+}

@@ -1,0 +1,5 @@
+./frogsnflies
+*.dbg
+*.prg
+*.sym
+*.vs

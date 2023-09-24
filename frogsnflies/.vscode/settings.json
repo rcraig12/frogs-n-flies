@@ -1,0 +1,11 @@
+{
+    "kickassembler.assembler.jar": "/home/robert/C64/KickAssembler/KickAss.jar",
+    "kickassembler.debuggerRuntime": "/home/robert/C64/C64Debugger/c64debugger",
+    "kickassembler.emulatorRuntime": "/usr/bin/x64",
+    "kickassembler.java.runtime": "/usr/bin/java",
+    "kickassembler.outputDirectory": "build",
+    "kickassembler.startup": "game.asm",
+    "kickassembler.autoAssembleTrigger": "onSave only",
+    "kickassembler.byteDumpFile": true,
+    "kickassembler.assembler.option.afo": true
+}
