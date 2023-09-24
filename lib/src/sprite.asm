@@ -1,6 +1,10 @@
 #importonce
 
 .const SPRITE_PTR = $07f8
+.const SPRITE_X = $d000
+.const SPRITE_X_UPPER = $d010
+.const SPRITE_Y = $d001
+.const SPRITE_ENABLE = $d015
 
 .const SPRITE0_PTR = $07f8
 .const SPRITE0_X = $d000
@@ -34,9 +38,40 @@
 .const SPRITE7_X = $d00e
 .const SPRITE7_Y = $d00f
 
+.const SPRITE0 = 1
+.const SPRITE1 = 2
+.const SPRITE2 = 4
+.const SPRITE3 = 8
+.const SPRITE4 = 16
+.const SPRITE5 = 32
+.const SPRITE6 = 64
+.const SPRITE7 = 128
+
+
 .macro SetupSprite( memLoc, spriteNum ){
   lda #( memLoc / $40 )
   sta SPRITE_PTR + spriteNum
+}
+
+.macro SpritePosition( xLo, xHi , y, spriteNum ) {
+  lda #xLo
+  sta SPRITE_X + (spriteNum * 2)
+  //lda SPRITE_X_HI + (spriteNum * 2)
+  lda #y
+  sta SPRITE_Y + (spriteNum * 2)
+}
+
+.macro EnableSprite( spriteNum ){
+  lda #spriteNum  
+  ora SPRITE_ENABLE
+  sta SPRITE_ENABLE
+}
+
+.macro DisableSprite( spriteNum ){
+  lda #spriteNum 
+  eor #$ff
+  and SPRITE_ENABLE
+  sta SPRITE_ENABLE
 }
 
 .namespace Sprite {

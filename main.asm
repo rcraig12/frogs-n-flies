@@ -14,31 +14,44 @@ start:
 
   :BasicROMDisable()
   :ClearScreen(BLACK)
-  :SetupSid4Noise()
 
-  //lda #( Sprite0 / $40)
-  //sta SPRITE0_PTR
   :SetupSprite(Sprite0, 0)
+  :SetupSprite(Sprite0, 1)
+  :SetupSprite(Sprite0, 2)
+  :SetupSprite(Sprite0, 3)
+  :SetupSprite(Sprite0, 4)
+  :SetupSprite(Sprite0, 5)
+  :SetupSprite(Sprite0, 6)
+  :SetupSprite(Sprite0, 7)
   
-  // Set xy pos for sprite 0
-  lda #$80
-  sta SPRITE0_X
-  sta SPRITE0_Y
+  :SpritePosition( $80, $00, $50, 0 )
+  :SpritePosition( $80, $01, $62, 1 )
+  :SpritePosition( $80, $00, $74, 2 )
+  :SpritePosition( $80, $00, $86, 3 )
+  :SpritePosition( $80, $00, $98, 4 )
+  :SpritePosition( $80, $00, $aa, 5 )
+  :SpritePosition( $80, $00, $bc, 6 )
+  :SpritePosition( $80, $00, $ce, 7 )
+ 
+  :EnableSprite(SPRITE0)
+  :EnableSprite(SPRITE1)
+  :EnableSprite(SPRITE2)
+  :EnableSprite(SPRITE3)
+  :EnableSprite(SPRITE4)
+  :EnableSprite(SPRITE5)
+  :EnableSprite(SPRITE6)
+  :EnableSprite(SPRITE7)
 
-  //enable sprite
-
-  lda #%0000001
-  sta $d015
-
-
+  :DisableSprite(SPRITE2)
+  :DisableSprite(SPRITE4)
+  :DisableSprite(SPRITE6)
+  
 loop:
 
-  jsr printMazeLine
-  jsr shiftUp
   clc
-  lda SPRITE0_X
+  lda SPRITE_X
   adc #$01
-  sta SPRITE0_X
+  sta SPRITE_X
   bcs toggle_high_bit_sprite0
   jmp !+
 
@@ -51,43 +64,6 @@ toggle_high_bit_sprite0:
   cmp $d012
   bne !-  
   jmp loop
-
-  getMazeChar:
-    lda SID_OSC3_R0
-    and #$01
-    beq !+
-    lda #206
-    jmp !++
-  !:
-    lda #205
-  !:
-    rts
-  
-printMazeLine:
-  ldx #$00
-  newChar:
-    jsr getMazeChar
-    sta BOTTOM_LINE,x
-    inx
-    cpx #41
-    bne newChar
-    rts
-
-shiftUp:
-  ldx #$00
-!:
-.for(var line = 1; line<25; line++ ){
-  lda SCREEN + (line * 40),x
-  sta SCREEN + (line * 40) - 40,x
-}
-  inx
-  cpx #40
-  beq !+
-  jmp !-
-!:
-  rts
-
-
 
 *=$2000 "Sprites"
 Sprite0:

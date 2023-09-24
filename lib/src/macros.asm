@@ -62,8 +62,6 @@
   bne !loop-
 }
 
-
-
 // Kernal ROM macros
 
 //SID macros
