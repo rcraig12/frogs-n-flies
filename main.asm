@@ -12,7 +12,7 @@ BasicUpstart2(start)
 
 start:
 
-  :BasicROMDisable()
+  :BasicAndKernelROMDisable()
   :ClearScreen(BLACK)
 
   :SetupSprite(Sprite0, 0)

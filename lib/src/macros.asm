@@ -22,6 +22,7 @@
 // ROM macros
 
 .macro BasicAndKernelROMDisable(){
+  sei
   lda #$35
   sta $0001 
 }
